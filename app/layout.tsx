@@ -6,6 +6,8 @@ import TRPCProvider from "./_trpc/provider";
 
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
+import NextUIProvider from "@/components/NextUIProvider";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +21,14 @@ const RootLayout: FC<{ children: ReactNode }> = ({ children }) => {
     <html lang="en">
       <body className={inter.className}>
         <SessionProvider>
-          <TRPCProvider cookies={cookies().toString()}>{children}</TRPCProvider>
+          <TRPCProvider cookies={cookies().toString()}>
+            <NextUIProvider>
+            <ThemeProvider>
+
+            {children}
+            </ThemeProvider>
+            </NextUIProvider>
+          </TRPCProvider>
         </SessionProvider>
       </body>
     </html>
